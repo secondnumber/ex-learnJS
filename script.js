@@ -1,25 +1,19 @@
-//deep copy
+const list = document.querySelector('.result');
+const clickMeButton = document.querySelector('.click-me');
+const numberPage = document.querySelector('.number');
+clickMeButton.addEventListener('click', makeRequest);
 
-let cource = {
-    name: 'English',
-    maxStudentsAmount: 10,
-    isOnline: true,
-    students: ['Maria', 'Pavel', 'Irina'],
-    class: {
-        teacher: {
-            name: 'Elena',
-            age: 58
-        }
+function makeRequest () {
+  $.ajax(`https://repetitora.net/api/JS/Images?page=${numberPage.value}&count=1`, {
+    success: function (data) {
+      data.forEach(element => {
+        const url = element.thumbnail;
+        const item = document.createElement('li');
+        const image = document.createElement('img');
+        image.src = url;
+        item.appendChild(image);
+        list.appendChild(item);
+      })
     }
+  });
 };
-
-console.log(cource);
-
-let intensive = {...cource};
-intensive.students = [...cource.students];
-intensive.class = {...cource.class};
-intensive.class.teacher = {...cource.class.teacher};
-console.log(intensive);
-
-intensive.class.teacher.name = 'Olga';
-
