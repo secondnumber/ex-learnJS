@@ -1,18 +1,33 @@
-const list = document.querySelector('.result');
-const clickMeButton = document.querySelector('.click-me');
+const listImg = document.querySelector('.result-img');
+const listTasks = document.querySelector('.result-tasks');
+const getImgButton = document.querySelector('.get-img');
 const numberPage = document.querySelector('.number');
-clickMeButton.addEventListener('click', () => {
+getImgButton.addEventListener('click', () => {
   const promise = getImages(numberPage.value);
-  promise.then(onDataReceived);
+  promise.then(onImagesReceived);
 });
 
-function onDataReceived (data) {
+const getTasksButton = document.querySelector('.get-tasks');
+getTasksButton.addEventListener('click', () => {
+  const promise = getTasks();
+  promise.then(onTasksReceived);
+});
+
+function onImagesReceived (data) {
   data.forEach(element => {
     const url = element.thumbnail;
     const item = document.createElement('li');
     const image = document.createElement('img');
     image.src = url;
     item.appendChild(image);
-    list.appendChild(item);
+    listImg.appendChild(item);
+  })
+}
+
+function onTasksReceived (data) {
+  data.forEach(element => {
+    const item = document.createElement('li');
+    item.innerHTML = element.title;
+    listTasks.appendChild(item);
   })
 }
