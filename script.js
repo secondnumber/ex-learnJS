@@ -2,7 +2,8 @@ const list = document.querySelector('.result');
 const clickMeButton = document.querySelector('.click-me');
 const numberPage = document.querySelector('.number');
 clickMeButton.addEventListener('click', () => {
-  getImages(numberPage.value, onDataReceived);
+  const promise = getImages(numberPage.value);
+  promise.then(onDataReceived);
 });
 
 function onDataReceived (data) {
