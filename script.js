@@ -1,4 +1,4 @@
-deleteTask("c0c5c5c8-4cb4-4dae-819d-4a3e60592104");
+updateTask('lalala', '9df6cff3-2935-444d-9700-f186a602bcee', true);
 
 const listImg = document.querySelector('.result-img');
 const listTasks = document.querySelector('.result-tasks');
@@ -31,7 +31,7 @@ function onTasksReceived (data) {
   data.forEach(element => {
     const item = document.createElement('li');
     item.id = element.id;
-    item.innerHTML = element.title;
+    item.innerHTML = element.title + element.done;
     listTasks.appendChild(item);
   })
 }
